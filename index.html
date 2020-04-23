@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Library</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>Library</h1>
+            <button class="new-button">New Book</button>    
+        </div>
+        <div class="form-div">
+            <form name="book-form">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author">
+                <label for="pages">Pages:</label>
+                <input type="number" id="pages" name="pages">
+                <label for="read">Has been read?</label>
+                <input type="radio" id="yes" name="read">
+                <input type="radio" id="no" name="read">
+                <button class="add-button">Add</button>
+            </form>                
+        </div>
+        <div class="library">
+            <div class="book">
+                <label class="title-label">TITLE</label>
+                <label class="author-label">AUTHOR</label>
+                <label class="pages-label">PAGES</label>
+                <div class="read-div">
+                    <label class="read-label">READ??</label>
+                </div>
+                <div class="options-div">
+                    <img class="delete-img" src="delete.png" alt="DELETE">
+                    <img class="toggle-img" src="toggle.png" alt="TOGGLE">
+                </div>
+            </div>
+        </div>
+        <script src="library.js"></script>
+    </body>
+</html>
