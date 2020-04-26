@@ -92,6 +92,10 @@ function render() {
         bookTitle.textContent = myLibrary[i].title;
         bookAuthor.textContent = myLibrary[i].author;
         bookPages.textContent = myLibrary[i].pages;
+        bookTab.classList.add('book');
+        bookTitle.classList.add('book-label', 'title-label');
+        bookAuthor.classList.add('book-label', 'author-label');
+        bookPages.classList.add('book-label', 'pages-label');
         console.log(myLibrary[i].pages);
 
         bookTab.appendChild(bookTitle);
@@ -101,6 +105,7 @@ function render() {
         let optionTab = document.createElement('div');
         let bookRead = document.createElement('label');
         bookRead.textContent = myLibrary[i].hasRead();
+        bookRead.classList.add('book-label');
         
         let deleteButton = document.createElement('button');
         let toggleButton = document.createElement('button');
@@ -129,6 +134,9 @@ function render() {
 function initializeFillerData() {
     addBookToLibrary('The Gun Slinger', 'Stephen King', 300, true);
     addBookToLibrary('Dune', 'Frank Herbert', 412, true);
+    addBookToLibrary('A New Hope', 'George Lucas', 321, false);
+    addBookToLibrary('Dead Sky, Black Sun', 'Graham McNeill', 250, true);
     addBookToLibrary('Catcher in the Rye', 'J. D. Salinger', 277, false);
+    addBookToLibrary('The Dark Crystal', 'Jim Henson Frank Oz', 423, true);
 }
 

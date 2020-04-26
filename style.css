@@ -1,0 +1,47 @@
+body {
+    display: grid;
+    text-align: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-div {
+    width: 10%;
+    margin: 0 auto;
+}
+.form-elm {
+    margin: 3px 0px 3px 0px;
+}
+.library {
+    display: grid;
+    grid-template-columns: repeat(5, 10vw);
+    column-gap: 10px;
+    row-gap: 10px;
+    justify-content: center;
+}
+.book {
+    display: grid;
+    grid-template-areas: 
+        "bookTitle"
+        "bookAuthor"
+        "bookPages"
+        "bookOptions";
+    background: brown;
+    border: 1px solid black;
+}
+.book-label {
+    color: white;
+}
+.title-label {
+    font-weight: bold;
+    font-size: 20px;
+}
+.author-label {
+    font-style: italic;
+    font-size: 16px;
+}
+.pages-label {
+    font-size: 12px;
+}

@@ -6,28 +6,30 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div class="header">
-            <h1>Library</h1>
-        </div>
+        <h1>Library</h1>
         <div class="form-div">
             <form name="book-form" onsubmit="return false">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
-                <label for="author">Author:</label>
-                <input type="text" id="author" name="author" required>
-                <label for="pages">Pages:</label>
-                <input type="number" id="pages" name="pages" required>
-                <label for="read">Has been read?</label>
-                <input type="radio" id="yes" name="read" required>
-                <input type="radio" id="no" name="read">
-                <button class="add-button">Add</button>
+                <label for="title" class="form-elm form-label">Title:</label>
+                <input type="text" id="title" name="title" class="form-input" placeholder="Title">
+                <label for="author" class="form-elm form-label">Author:</label>
+                <input type="text" id="author" name="author" class="form-input" placeholder="Author" input>
+                <label for="pages" class="form-elm form-label">Pages:</label>
+                <input type="number" id="pages" name="pages" class="form-input" placeholder="Pages" input>
+                <label for="read" class="form-elm form-label">Has been read?</label>
+                <div class="form-radio">
+                    <label for="yes" class="form-elm form-label">Yes</label>
+                    <input type="radio" id="yes" name="read" class="form-input" input>
+                    <label for="no" class="form-elm form-label">No</label>
+                    <input type="radio" id="no" name="read" class="form-input" >    
+                </div>
+                <button class="form-elm add-button">Add</button>
             </form>                
         </div>
         <div class="library">
             <div class="book">
-                <label class="title-label">TITLE</label>
-                <label class="author-label">AUTHOR</label>
-                <label class="pages-label">PAGES</label>
+                <label class="title-label book-label">TITLE</label>
+                <label class="author-label book-label">AUTHOR</label>
+                <label class="pages-label book-label">PAGES</label>
                 <div class="read-div">
                     <label class="read-label">READ??</label>
                 </div>
@@ -37,6 +39,7 @@
                 </div>
             </div>
         </div>
+
         <script src="library.js"></script>
     </body>
 </html>
