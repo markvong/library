@@ -25,6 +25,9 @@ form {
     color: white;
     border-radius: 10%;
 }
+.new-button:hover {
+    transform: scale(1.2);
+}
 .form-div {
     display: none;
     width: 10%;
@@ -33,6 +36,10 @@ form {
 }
 .form-elm {
     margin: 3px 0px 3px 0px;
+}
+.add-button:hover {
+    transform: scale(1.2);
+    opacity: 50%;
 }
 .library {
     display: grid;
@@ -73,14 +80,16 @@ form {
     height: 30px;
     grid-area: bookSpacing;
 }
-
 .options-div {
     grid-area: bookOptions;
-    /* flex-direction: column; */
 }
 .read-label {
     grid-area: bookRead;
 }
 .book-label {
     color: white;
+}
+.option-button:hover {
+    transform: scale(1.1);
+    opacity: 50%;
 }

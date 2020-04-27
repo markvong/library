@@ -11,18 +11,15 @@ function Book(title, author, numPages, read, index) {
         return this.title + ' by ' + this.author + 
         ', ' + this.pages + ' pages, ' + this.hasRead();
     }
-
-    this.hasRead = function() {
-        return this.read ? 'Already read' : 'Not read'
-    }
-
-    this.toggleRead = function() {
-        if (this.read) this.read = false;
-        else this.read = true;
-        console.log(this.read);
-    }
+}
+Book.prototype.hasRead = function() {
+    return this.read ? 'Already read' : 'Not read'
 }
 
+Book.prototype.toggleRead = function() {
+    if (this.read) this.read = false;
+    else this.read = true;
+}
 
 initializeFillerData();
 render();
@@ -39,7 +36,6 @@ addBookButton.addEventListener('click', () => {
     let author  = document.forms['book-form']['author'].value;
     let pages   = document.forms['book-form']['pages'].value;
     let read    = document.forms['book-form']['read'].value;
-    console.log('read: ' + read);
     if (validateForm(title, author, pages, read)) {
         addBookToLibrary(title, author, pages, read);
         render();
@@ -116,6 +112,8 @@ function render() {
         
         let deleteButton = document.createElement('button');
         let toggleButton = document.createElement('button');
+        deleteButton.classList.add('option-button');
+        toggleButton.classList.add('option-button');
 
         deleteButton.textContent = 'Delete';
         deleteButton.id = ''+i;
