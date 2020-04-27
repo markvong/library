@@ -8,13 +8,12 @@ function Book(title, author, numPages, read, index) {
     this.index = index;
 
     this.info = function() {
-        let hasRead = this.read ? 'Has already read' : 'Has not yet read';
         return this.title + ' by ' + this.author + 
-        ', ' + this.pages + ' pages, ' + hasRead;
+        ', ' + this.pages + ' pages, ' + this.hasRead();
     }
 
     this.hasRead = function() {
-        return this.read ? 'Has already read' : 'Has not yet read'
+        return this.read ? 'Already read' : 'Not read'
     }
 
     this.toggleRead = function() {
@@ -28,6 +27,12 @@ function Book(title, author, numPages, read, index) {
 initializeFillerData();
 render();
 
+const newBookButton = document.querySelector('.new-button');
+newBookButton.addEventListener('click', () => {
+    const formDiv = document.querySelector('.form-div');
+    formDiv.style.display = 'block';
+});
+
 const addBookButton = document.querySelector('.add-button');
 addBookButton.addEventListener('click', () => {
     let title   = document.forms['book-form']['title'].value;
@@ -38,7 +43,7 @@ addBookButton.addEventListener('click', () => {
     if (validateForm(title, author, pages, read)) {
         addBookToLibrary(title, author, pages, read);
         render();
-        clearForm();    
+        clearForm();
     }
 });
 
@@ -61,6 +66,8 @@ function validateForm(title, author, pages, read) {
 }
 
 function clearForm() {
+    const formDiv = document.querySelector('.form-div');
+    formDiv.style.display = 'None';
     document.forms['book-form']['title'].value = '';
     document.forms['book-form']['author'].value = '';
     document.forms['book-form']['pages'].value = '';
@@ -89,6 +96,7 @@ function render() {
         let bookTitle = document.createElement('label');
         let bookAuthor = document.createElement('label');
         let bookPages = document.createElement('label');
+        let bookRead = document.createElement('label');
         bookTitle.textContent = myLibrary[i].title;
         bookAuthor.textContent = myLibrary[i].author;
         bookPages.textContent = myLibrary[i].pages;
@@ -96,16 +104,15 @@ function render() {
         bookTitle.classList.add('book-label', 'title-label');
         bookAuthor.classList.add('book-label', 'author-label');
         bookPages.classList.add('book-label', 'pages-label');
-        console.log(myLibrary[i].pages);
+        bookRead.textContent = myLibrary[i].hasRead();
+        bookRead.classList.add('book-label', 'read-label');
 
         bookTab.appendChild(bookTitle);
         bookTab.appendChild(bookAuthor);
         bookTab.appendChild(bookPages);
 
         let optionTab = document.createElement('div');
-        let bookRead = document.createElement('label');
-        bookRead.textContent = myLibrary[i].hasRead();
-        bookRead.classList.add('book-label');
+        optionTab.classList.add('options-div');
         
         let deleteButton = document.createElement('button');
         let toggleButton = document.createElement('button');
@@ -120,10 +127,15 @@ function render() {
             bookRead.textContent = myLibrary[i].hasRead();
         });
 
-        optionTab.appendChild(bookRead);
+        // optionTab.appendChild(bookRead);
         optionTab.appendChild(deleteButton);
         optionTab.appendChild(toggleButton);
 
+        let spacingTab = document.createElement('div');
+        spacingTab.classList.add('spacing-div');
+
+        bookTab.appendChild(spacingTab);
+        bookTab.appendChild(bookRead);
         bookTab.appendChild(optionTab);
         library.appendChild(bookTab);
 

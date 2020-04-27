@@ -1,15 +1,35 @@
+@font-face {
+    font-family: typewriter;
+    src: url('typewcond_regular.otf') format("opentype");
+}
 body {
+    font-family: typewriter;
     display: grid;
     text-align: center;
 }
+h1 {
+    font-size: 32px;
+}
 form {
+    font-size: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+.new-div {
+    margin-bottom: 10px;
+}
+.new-button {
+    height: 32px;
+    background-color: brown;
+    color: white;
+    border-radius: 10%;
+}
 .form-div {
+    display: none;
     width: 10%;
     margin: 0 auto;
+    margin-bottom: 10px;
 }
 .form-elm {
     margin: 3px 0px 3px 0px;
@@ -22,26 +42,45 @@ form {
     justify-content: center;
 }
 .book {
+    font-family: typewriter;
     display: grid;
     grid-template-areas: 
         "bookTitle"
         "bookAuthor"
         "bookPages"
+        "bookSpacing"
+        "bookRead"
         "bookOptions";
     background: brown;
-    border: 1px solid black;
-}
-.book-label {
-    color: white;
+    border-radius: 5%;
+    padding: 10px;
 }
 .title-label {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
+    grid-area: bookTitle;
 }
 .author-label {
     font-style: italic;
-    font-size: 16px;
+    font-size: 16x;
+    grid-area: bookAuthor;
 }
 .pages-label {
     font-size: 12px;
+    grid-area: bookPages;
+}
+.spacing-div {
+    height: 30px;
+    grid-area: bookSpacing;
+}
+
+.options-div {
+    grid-area: bookOptions;
+    /* flex-direction: column; */
+}
+.read-label {
+    grid-area: bookRead;
+}
+.book-label {
+    color: white;
 }
