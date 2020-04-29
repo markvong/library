@@ -1,5 +1,15 @@
 let myLibrary = [];
 
+// var firebaseConfig = {
+//     apiKey: "AIzaSyD-YslEN-Fso8dJtmCj2U8I9DE1P7pEU7c",
+//     authDomain: "library-93c21.firebaseapp.com",
+//     databaseURL: "https://library-93c21.firebaseio.com",
+//     projectId: "library-93c21",
+//     storageBucket: "library-93c21.appspot.com",
+//     messagingSenderId: "784844984170",
+//     appId: "1:784844984170:web:270cbc7f42d2d759c31f13"
+// };
+
 function Book(title, author, numPages, read, index) {
     this.title = title;
     this.author = author;
@@ -11,7 +21,11 @@ function Book(title, author, numPages, read, index) {
         return this.title + ' by ' + this.author + 
         ', ' + this.pages + ' pages, ' + this.hasRead();
     }
+    this.shelve = function() {
+        return JSON.stringify(this);
+    }
 }
+
 Book.prototype.hasRead = function() {
     return this.read ? 'Already read' : 'Not read'
 }
@@ -23,6 +37,22 @@ Book.prototype.toggleRead = function() {
 
 initializeFillerData();
 render();
+// storeLibrary();
+retrieveLibrary();
+
+function retrieveLibrary() {
+    firebase.database().ref('books/').once('value', (snap) => {
+        snap.forEach((child) => {
+            // some sort of manipulation of the array
+            console.log(child.key + ', ' + child.val());
+        })
+    });
+}
+function storeLibrary() {
+    myLibrary.forEach((book) => {
+        firebase.database().ref('books/'+book.title).set(book.shelve());
+    });
+}
 
 const newBookButton = document.querySelector('.new-button');
 newBookButton.addEventListener('click', () => {
