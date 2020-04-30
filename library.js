@@ -1,14 +1,5 @@
 let myLibrary = [];
 
-// var firebaseConfig = {
-//     apiKey: "AIzaSyD-YslEN-Fso8dJtmCj2U8I9DE1P7pEU7c",
-//     authDomain: "library-93c21.firebaseapp.com",
-//     databaseURL: "https://library-93c21.firebaseio.com",
-//     projectId: "library-93c21",
-//     storageBucket: "library-93c21.appspot.com",
-//     messagingSenderId: "784844984170",
-//     appId: "1:784844984170:web:270cbc7f42d2d759c31f13"
-// };
 
 function Book(title, author, numPages, read, index) {
     this.title = title;
@@ -35,17 +26,20 @@ Book.prototype.toggleRead = function() {
     else this.read = true;
 }
 
-initializeFillerData();
-render();
-// storeLibrary();
-retrieveLibrary();
+retrieveLibrary(render);
 
-function retrieveLibrary() {
+function retrieveLibrary(callback) {
+    while (myLibrary.length) myLibrary.pop();
     firebase.database().ref('books/').once('value', (snap) => {
         snap.forEach((child) => {
-            // some sort of manipulation of the array
-            console.log(child.key + ', ' + child.val());
-        })
+            console.log(child.val());
+            let bookJSON = JSON.parse(child.val());
+            myLibrary.push(new Book(
+                bookJSON.title, bookJSON.author, bookJSON.pages, 
+                bookJSON.read, myLibrary.length));
+        });
+        console.log(myLibrary);
+        callback();
     });
 }
 function storeLibrary() {
@@ -111,6 +105,7 @@ function addBookToLibrary(title, author, pages, read) {
     let index = myLibrary.length;
     let book = new Book(title, author, pages, read, index);
     myLibrary.push(book);
+    storeLibrary();
 }
 
 function render() {
