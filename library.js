@@ -95,9 +95,7 @@ function clearForm() {
 }
 
 function deleteBook() {
-    console.log(this.id);
     myLibrary.splice(this.id, 1);
-    console.log(myLibrary);
     render();
 }
 
