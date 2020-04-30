@@ -26,27 +26,8 @@ Book.prototype.toggleRead = function() {
     else this.read = true;
 }
 
+// initializeFillerData();
 retrieveLibrary(render);
-
-function retrieveLibrary(callback) {
-    while (myLibrary.length) myLibrary.pop();
-    firebase.database().ref('books/').once('value', (snap) => {
-        snap.forEach((child) => {
-            console.log(child.val());
-            let bookJSON = JSON.parse(child.val());
-            myLibrary.push(new Book(
-                bookJSON.title, bookJSON.author, bookJSON.pages, 
-                bookJSON.read, myLibrary.length));
-        });
-        console.log(myLibrary);
-        callback();
-    });
-}
-function storeLibrary() {
-    myLibrary.forEach((book) => {
-        firebase.database().ref('books/'+book.title).set(book.shelve());
-    });
-}
 
 const newBookButton = document.querySelector('.new-button');
 newBookButton.addEventListener('click', () => {
@@ -95,6 +76,7 @@ function clearForm() {
 }
 
 function deleteBook() {
+    firebase.database().ref('books/'+myLibrary[this.id].title).remove();
     myLibrary.splice(this.id, 1);
     render();
 }
@@ -103,7 +85,22 @@ function addBookToLibrary(title, author, pages, read) {
     let index = myLibrary.length;
     let book = new Book(title, author, pages, read, index);
     myLibrary.push(book);
-    storeLibrary();
+    myLibrary.forEach((book) => {
+        firebase.database().ref('books/'+book.title).set(book.shelve());
+    });
+}
+
+function retrieveLibrary(callback) {
+    while (myLibrary.length) myLibrary.pop();
+    firebase.database().ref('books/').once('value', (snap) => {
+        snap.forEach((child) => {
+            let bookJSON = JSON.parse(child.val());
+            myLibrary.push(new Book(
+                bookJSON.title, bookJSON.author, bookJSON.pages, 
+                bookJSON.read, myLibrary.length));
+        });
+        callback();
+    });
 }
 
 function render() {
@@ -171,5 +168,9 @@ function initializeFillerData() {
     addBookToLibrary('Dead Sky, Black Sun', 'Graham McNeill', 250, true);
     addBookToLibrary('Catcher in the Rye', 'J. D. Salinger', 277, false);
     addBookToLibrary('The Dark Crystal', 'Jim Henson Frank Oz', 423, true);
+    addBookToLibrary('The Dak Crystal', 'Jim Heson Frank Oz', 425, false);
+    addBookToLibrary('The Drk Crystal', 'Jim Henon Frank Oz', 424, true);
+    addBookToLibrary('The Dar Crystal', 'Jim Henso Frank Oz', 422, false);
+    addBookToLibrary('The ark Crystal', 'Jim enson Frank Oz', 421, true);
 }
 
